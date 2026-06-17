@@ -1,0 +1,104 @@
+.wrapper {
+  background-color: oklch(97.7% 0.014 308.299);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 480px;
+}
+.login h1 {
+  font-size: 2.25rem;
+}
+.login p {
+  color: oklch(44.6% 0.03 256.802);
+  margin-bottom: 1rem;
+}
+.buttons {
+  background-color: rgb(236, 236, 236);
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  border-radius: 1rem;
+  padding: 3px;
+  margin-bottom: 0.5rem;
+}
+.buttons a {
+  flex: 1;
+  display: block;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 1rem;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+.active {
+  background-color: white;
+}
+
+.form {
+  width: 100%;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgb(236, 236, 236);
+  padding: 1.4rem;
+}
+.form h3 {
+  font-size: 1rem;
+}
+.form p {
+  color: oklch(44.6% 0.03 256.802);
+  margin-bottom: 1.4rem;
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.7rem;
+  gap: 0.1rem;
+}
+.formGroup label {
+  font-size: 0.9rem;
+}
+.formGroup input {
+  background-color: rgb(236, 236, 236);
+  border: none;
+  outline: none;
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 0.7rem;
+}
+.checkboxGroup input {
+  background-color: rgb(236, 236, 236);
+  border: none;
+  width: 16px;
+  height: 16px;
+}
+.submitButton {
+  background-color: black;
+  padding: 6px 16px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 480px) {
+  .login {
+    width: 90%;
+  }
+}
