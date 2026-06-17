@@ -1,32 +1,32 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const habitSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: "User",
+    required: true,
   },
   title: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    default: ''
+    default: "",
   },
   frequency: {
     type: String,
-    enum: ['daily', 'weekly'],
-    default: 'daily'
+    enum: ["daily", "weekly"],
+    default: "daily",
   },
   color: {
     type: String,
-    default: '#3498db'
+    default: "#3498db",
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
-module.exports = mongoose.model('Habit', habitSchema);
+export default mongoose.model("Habit", habitSchema);

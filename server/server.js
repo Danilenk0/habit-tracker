@@ -1,25 +1,20 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('../config/db');
-const authRoutes = require('../routes/auth');
-const habitsRoutes = require('../routes/habits');
+import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
+import connectDB from "./config/db.js";
+import authRoutes from "./routes/auth.js";
+import habitsRoutes from "./routes/habits.js";
 
 const app = express();
-
+dotenv.config();
 connectDB();
 
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/auth', authRoutes);
-app.use('/api/habits', habitsRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/habits", habitsRoutes);
 
-app.get('/health', (req, res) => {
-  res.json({ status: 'Server is running' });
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server running on port ${process.env.PORT || 5000}`);
 });
