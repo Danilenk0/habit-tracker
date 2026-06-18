@@ -1,23 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Pliant:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-  --color-bg: #ffffff;
+  --color-bg: oklch(0.98 0 0);
+  --color-bg-secondary: white;
   --color-text: #000000;
   --color-border: #ececec;
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-btn-bg: #ffffff;
   --color-btn-border: #ececec;
   --color-btn-text: #000000;
+  --color-text-secondary: oklch(44.6% 0.03 256.802);
 }
 
 [data-theme="dark"] {
-  --color-bg: #1a1a1a;
+  --color-bg: oklch(21% 0.034 264.665);
+  --color-bg-secondary: oklch(27.8% 0.033 256.848);
   --color-text: #ffffff;
   --color-border: #333333;
   --color-shadow: rgba(255, 255, 255, 0.1);
   --color-btn-bg: #2a2a2a;
   --color-btn-border: #444444;
   --color-btn-text: #ffffff;
+  --color-text-secondary: oklch(60.98% 0.04066 259.796);
 }
 
 *,
@@ -57,7 +61,9 @@ body {
   line-height: 1.5;
   background-color: var(--color-bg);
   color: var(--color-text);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 ul[class],
