@@ -1,0 +1,22 @@
+.errorStack {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  display: flex;
+  gap: 0.1rem;
+  flex-direction: column;
+  align-items: center;
+}
+.error {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+.error p {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+}

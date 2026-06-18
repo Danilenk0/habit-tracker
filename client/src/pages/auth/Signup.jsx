@@ -3,6 +3,7 @@ import style from "./Auth.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import instance from "../../axios";
+import ErrorStack from "../../components/errorStack/ErrorStack";
 
 const Signup = () => {
   const location = useLocation();
@@ -11,18 +12,24 @@ const Signup = () => {
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const addError = (message) => {
+    let id = Date.now()
+    setErrors(prev => [...prev, {id, message}]);
+    setTimeout(() => {
+      setErrors(prev => prev.slice(1));
+    }, 2000);
+  }
 
   const handleSendForm = async (e) => {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.password) {
-      setError("Все поля обязательны");
+      addError("All fields are required")
       return;
     }
-
-    setError("");
     setLoading(true);
 
     try {
@@ -31,9 +38,8 @@ const Signup = () => {
       });
       console.log("Registration successful:", response.data);
     } catch (error) {
-      setError(
-        error.response?.data?.message || error.message || "Ошибка регистрации",
-      );
+      addError( error.response?.data?.message || error.message || "Ошибка регистрации");
+
     } finally {
       setLoading(false);
     }
@@ -41,6 +47,7 @@ const Signup = () => {
 
   return (
     <div className={style.wrapper}>
+      <ErrorStack errors={errors} setErrors={setErrors} />
       <div className={style.login}>
         <h1>Habit Tracker</h1>
         <p>Build better habits, one day at a time.</p>
@@ -62,9 +69,6 @@ const Signup = () => {
         <form className={style.form} onSubmit={handleSendForm}>
           <h3>Create Account</h3>
           <p>Sign up to start tracking your habits!</p>
-          {error && (
-            <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>
-          )}
           <div className={style.formGroup}>
             <label htmlFor="name">Full name</label>
             <input
