@@ -29,7 +29,7 @@ const Signup = () => {
       const response = await instance.post("/auth/register", formData, {
         withCredentials: true,
       });
-      console.log("Registration successful:", response.data);
+      addAlert("Registration successful!", "success");
     } catch (error) {
       addAlert(
         error.response?.data?.message || error.message || "Ошибка регистрации",
