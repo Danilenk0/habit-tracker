@@ -1,7 +1,6 @@
 import style from "./ErrorStack.module.css";
 import { createPortal } from "react-dom";
 import AlertIcon from "../icons/AlertIcon";
-import { useEffect } from "react";
 
 const ErrorStack = ({ errors }) => {
   const root = document.getElementById("toast-root");
@@ -10,9 +9,15 @@ const ErrorStack = ({ errors }) => {
   return createPortal(
     <section className={style.errorStack}>
       {errors.map((item) => (
-        <div key={item.id} className={style.error}>
+        <div
+          key={item.id}
+          className={`${style.stackItem} ${style[`stackItem__${item.type}`]}`}
+        >
           <AlertIcon width="18" height="18" />
-          <p>{item.message}</p>
+          <div className={style.alertData}>
+            <h6>{item.type}</h6>
+            <p>{item.message}</p>
+          </div>
         </div>
       ))}
     </section>,

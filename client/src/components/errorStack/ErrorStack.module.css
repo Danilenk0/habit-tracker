@@ -7,16 +7,36 @@
   flex-direction: column;
   align-items: center;
 }
-.error {
+.stackItem {
   display: flex;
-  gap: 0.3rem;
+  gap: 1rem;
   align-items: center;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1rem;
   border-radius: 8px;
   border: 1px solid var(--color-border);
 }
-.error p {
-  font-size: 0.6rem;
+.stackItem__error {
+  border-color: rgb(255, 173, 173);
+  color: rgb(255, 98, 98);
+}
+.stackItem__success {
+  border-color: #00f700;
+  color: #00cf00;
+}
+.stackItem__warning {
+  border-color: rgb(186, 186, 117);
+  color: rgb(174, 174, 82);
+}
+.alertData {
+  display: flex;
+  flex-direction: column;
+}
+.alertData h6 {
+  margin: 0;
+  font-size: 0.8;
+}
+.alertData p {
+  font-size: 0.7rem;
   font-weight: 400;
   color: var(--color-text-secondary);
 }

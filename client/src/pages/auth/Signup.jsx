@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import instance from "../../axios";
 import ErrorStack from "../../components/errorStack/ErrorStack";
+import useErrorStack from "../../hooks/useErrorStack";
 
 const Signup = () => {
   const location = useLocation();
@@ -12,22 +13,14 @@ const Signup = () => {
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors, addError] = useErrorStack([]);
   const [loading, setLoading] = useState(false);
-
-  const addError = (message) => {
-    let id = Date.now()
-    setErrors(prev => [...prev, {id, message}]);
-    setTimeout(() => {
-      setErrors(prev => prev.slice(1));
-    }, 2000);
-  }
 
   const handleSendForm = async (e) => {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.password) {
-      addError("All fields are required")
+      addError("All fields are required", "error");
       return;
     }
     setLoading(true);
@@ -38,8 +31,10 @@ const Signup = () => {
       });
       console.log("Registration successful:", response.data);
     } catch (error) {
-      addError( error.response?.data?.message || error.message || "Ошибка регистрации");
-
+      addError(
+        error.response?.data?.message || error.message || "Ошибка регистрации",
+        "error",
+      );
     } finally {
       setLoading(false);
     }
@@ -47,7 +42,7 @@ const Signup = () => {
 
   return (
     <div className={style.wrapper}>
-      <ErrorStack errors={errors} setErrors={setErrors} />
+      <ErrorStack errors={errors} />
       <div className={style.login}>
         <h1>Habit Tracker</h1>
         <p>Build better habits, one day at a time.</p>

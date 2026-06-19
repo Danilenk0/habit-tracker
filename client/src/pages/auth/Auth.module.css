@@ -13,14 +13,15 @@
   width: 480px;
 }
 .login h1 {
-  font-size: 2.25rem;
+  font-size: 2.4rem;
 }
 .login p {
   color: oklch(44.6% 0.03 256.802);
   margin-bottom: 1rem;
+  font-weight: 400;
 }
 .buttons {
-  background-color: rgb(236, 236, 236);
+  background-color: rgb(244, 244, 244);
   display: flex;
   gap: 0.5rem;
   width: 100%;
@@ -53,11 +54,13 @@
   padding: 1.4rem;
 }
 .form h3 {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 .form p {
   color: oklch(44.6% 0.03 256.802);
   margin-bottom: 1.4rem;
+  font-weight: 400;
+  font-size: 0.8rem;
 }
 .formGroup {
   display: flex;
@@ -69,7 +72,7 @@
   font-size: 0.9rem;
 }
 .formGroup input {
-  background-color: rgb(236, 236, 236);
+  background-color: rgb(244, 244, 244);
   border: none;
   outline: none;
   padding: 4px 12px;
@@ -95,6 +98,7 @@
   color: white;
   font-size: 0.9rem;
   border-radius: 8px;
+  border: none;
 }
 
 @media (max-width: 480px) {
