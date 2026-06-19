@@ -3,8 +3,8 @@ import style from "./Auth.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import instance from "../../axios";
-import ErrorStack from "../../components/errorStack/ErrorStack";
-import useErrorStack from "../../hooks/useErrorStack";
+import AlertStack from "../../components/alertStack/AlertStack";
+import useAlertStack from "../../hooks/useAlertStack";
 
 const Signup = () => {
   const location = useLocation();
@@ -13,14 +13,14 @@ const Signup = () => {
     email: "",
     password: "",
   });
-  const [errors, setErrors, addError] = useErrorStack([]);
+  const [alerts, setAlert, addAlert] = useAlertStack([]);
   const [loading, setLoading] = useState(false);
 
   const handleSendForm = async (e) => {
     e.preventDefault();
 
     if (!formData.name || !formData.email || !formData.password) {
-      addError("All fields are required", "error");
+      addAlert("All fields are required", "error");
       return;
     }
     setLoading(true);
@@ -31,7 +31,7 @@ const Signup = () => {
       });
       console.log("Registration successful:", response.data);
     } catch (error) {
-      addError(
+      addAlert(
         error.response?.data?.message || error.message || "Ошибка регистрации",
         "error",
       );
@@ -42,7 +42,7 @@ const Signup = () => {
 
   return (
     <div className={style.wrapper}>
-      <ErrorStack errors={errors} />
+      <AlertStack alerts={alerts} />
       <div className={style.login}>
         <h1>Habit Tracker</h1>
         <p>Build better habits, one day at a time.</p>

@@ -1,7 +1,7 @@
 import style from "./Auth.module.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import ErrorStack from "../../components/errorStack/ErrorStack";
+import AlertStack from "../../components/alertStack/AlertStack";
 const Login = () => {
   const location = useLocation();
 

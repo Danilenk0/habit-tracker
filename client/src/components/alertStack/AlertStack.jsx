@@ -1,14 +1,14 @@
-import style from "./ErrorStack.module.css";
+import style from "./AlertStack.module.css";
 import { createPortal } from "react-dom";
 import AlertIcon from "../icons/AlertIcon";
 
-const ErrorStack = ({ errors }) => {
+const AlertStack = ({ alerts }) => {
   const root = document.getElementById("toast-root");
   if (!root) return null;
 
   return createPortal(
-    <section className={style.errorStack}>
-      {errors.map((item) => (
+    <section className={style.alertStack}>
+      {alerts.map((item) => (
         <div
           key={item.id}
           className={`${style.stackItem} ${style[`stackItem__${item.type}`]}`}
@@ -25,4 +25,4 @@ const ErrorStack = ({ errors }) => {
   );
 };
 
-export default ErrorStack;
+export default AlertStack;
