@@ -29,7 +29,9 @@ const Signup = () => {
       const response = await instance.post("/auth/register", formData, {
         withCredentials: true,
       });
-      addAlert("Registration successful!", "success");
+      if (response.status === 201) {
+        addAlert("Registration successful!", "success");
+      }
     } catch (error) {
       addAlert(
         error.response?.data?.message || error.message || "Ошибка регистрации",

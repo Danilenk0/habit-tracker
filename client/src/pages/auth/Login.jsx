@@ -8,7 +8,7 @@ import instance from "../../axios";
 
 const Login = () => {
   const location = useLocation();
-  const [alerts, setAlet, addAlert] = useAlertStack([]);
+  const [alerts, setAlert, addAlert] = useAlertStack([]);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,7 +20,9 @@ const Login = () => {
       const response = await instance.post("/auth/login", formData, {
         withCredentials: true,
       });
-      addAlert("Authorization successful", "success");
+      if (response.status === 200) {
+        addAlert("Login successful!", "success");
+      }
     } catch (error) {
       addAlert(
         error?.response?.data?.message || error.message || "Unknown error",
