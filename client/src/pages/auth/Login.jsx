@@ -1,6 +1,6 @@
 import style from "./Auth.module.css";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AlertStack from "../../components/alertStack/AlertStack";
 import useAlertStack from "../../hooks/useAlertStack";
@@ -8,6 +8,7 @@ import instance from "../../axios";
 
 const Login = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [alerts, setAlert, addAlert] = useAlertStack([]);
   const [formData, setFormData] = useState({
     email: "",
@@ -22,6 +23,7 @@ const Login = () => {
       });
       if (response.status === 200) {
         addAlert("Login successful!", "success");
+        navigate("/");
       }
     } catch (error) {
       addAlert(

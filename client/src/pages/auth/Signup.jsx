@@ -1,13 +1,14 @@
 import { useState } from "react";
 import style from "./Auth.module.css";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import instance from "../../axios";
 import AlertStack from "../../components/alertStack/AlertStack";
 import useAlertStack from "../../hooks/useAlertStack";
 
 const Signup = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,6 +32,7 @@ const Signup = () => {
       });
       if (response.status === 201) {
         addAlert("Registration successful!", "success");
+        navigate("/");
       }
     } catch (error) {
       addAlert(
