@@ -7,7 +7,7 @@ const generateToken = (userId) => {
 
 const register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, name, password } = req.body;
 
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password required" });
@@ -18,7 +18,7 @@ const register = async (req, res) => {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    const user = new User({ email, password });
+    const user = new User({ email, name, password });
     await user.save();
 
     const token = generateToken(user._id);

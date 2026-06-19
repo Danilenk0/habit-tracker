@@ -7,24 +7,11 @@ import instance from "./axios";
 import useAuth from "./hooks/useAuth";
 
 function App() {
-  const { user, setUser } = useAuth();
-  const [alerts, setAlert, addAlert] = useAlertStack();
+  const { user, checkAuth } = useAuth();
+  const [alerts] = useAlertStack();
   useEffect(() => {
-    getMe();
+    checkAuth();
   }, []);
-
-  const getMe = async () => {
-    try {
-      const response = await instance.get("/auth/me", {
-        withCredentials: true,
-      });
-      setUser(response.data);
-    } catch (error) {
-      addAlert(
-        error?.response?.data?.message || error?.message || "Unknown error",
-      );
-    }
-  };
 
   return (
     <div className="App">
