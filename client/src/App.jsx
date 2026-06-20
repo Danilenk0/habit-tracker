@@ -5,6 +5,7 @@ import useAlertStack from "./hooks/useAlertStack";
 import AlertStack from "./components/alertStack/AlertStack";
 import useAuth from "./hooks/useAuth";
 import Plus from "./components/icons/Plus";
+import NoHabit from "./components/noHabit/NoHabit";
 
 function App() {
   const { user, checkAuth } = useAuth();
@@ -28,15 +29,7 @@ function App() {
             <p>Add Habit</p>
           </button>
         </div>
-        <section className="no-habit">
-          <div>
-            <p>No Habits yet. Start building better habits today!</p>
-            <button className="btn btn__black">
-              <Plus width={18} height={18} />
-              <p>Add Your First Habit</p>
-            </button>
-          </div>
-        </section>
+        <NoHabit />
       </main>
     </div>
   );
