@@ -5,7 +5,7 @@
   --color-bg-secondary: white;
   --color-bg-black: black;
   --color-text: #000000;
-  --color-text-black: white;
+  --color-text-white: white;
   --color-border: #ececec;
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-btn-bg: #ffffff;
@@ -19,7 +19,7 @@
   --color-bg-secondary: oklch(27.8% 0.033 256.848);
   --color-bg-black: white;
   --color-text: #ffffff;
-  --color-text-black: black;
+  --color-text-white: black;
   --color-border: #333333;
   --color-shadow: rgba(255, 255, 255, 0.1);
   --color-btn-bg: #2a2a2a;
@@ -29,14 +29,17 @@
 }
 
 .btn {
-  padding: 0.4rem 0.6rem;
+  background-color: white;
+  padding: 0.5rem 0.7rem;
   display: flex;
   gap: 0.4rem;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 0.8rem;
+  white-space: nowrap;
   transition:
     bacground-color 0.3s ease,
     border-color 0.3s ease,
@@ -46,7 +49,7 @@
 .btn__black {
   border: none;
   background-color: var(--color-bg-black);
-  color: var(--color-text-black);
+  color: var(--color-text-white);
 }
 
 *,

@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import AlertIcon from "../icons/AlertIcon";
 
 const AlertStack = ({ alerts }) => {
-  const root = document.getElementById("toast-root");
+  const root = document.getElementById("portal-root");
   if (!root) return null;
 
   return createPortal(
