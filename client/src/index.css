@@ -3,7 +3,9 @@
 :root {
   --color-bg: oklch(0.98 0 0);
   --color-bg-secondary: white;
+  --color-bg-black: black;
   --color-text: #000000;
+  --color-text-black: white;
   --color-border: #ececec;
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-btn-bg: #ffffff;
@@ -15,13 +17,36 @@
 [data-theme="dark"] {
   --color-bg: oklch(21% 0.034 264.665);
   --color-bg-secondary: oklch(27.8% 0.033 256.848);
+  --color-bg-black: white;
   --color-text: #ffffff;
+  --color-text-black: black;
   --color-border: #333333;
   --color-shadow: rgba(255, 255, 255, 0.1);
   --color-btn-bg: #2a2a2a;
   --color-btn-border: #444444;
   --color-btn-text: #ffffff;
   --color-text-secondary: oklch(60.98% 0.04066 259.796);
+}
+
+.btn {
+  padding: 0.4rem 0.6rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  transition:
+    bacground-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.btn__black {
+  border: none;
+  background-color: var(--color-bg-black);
+  color: var(--color-text-black);
 }
 
 *,
@@ -51,7 +76,7 @@ dl,
 dd {
   margin: 0;
   font-family: "Pliant", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 body {
