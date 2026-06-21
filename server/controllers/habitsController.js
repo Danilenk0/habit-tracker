@@ -2,10 +2,10 @@ import Habit from "../models/Habit.js";
 
 const createHabit = async (req, res) => {
   try {
-    const { title, description, frequency, color } = req.body;
+    const { name, description, frequency, color } = req.body;
 
-    if (!title) {
-      return res.status(400).json({ message: "Title is required" });
+    if (!name) {
+      return res.status(400).json({ message: "Name is required" });
     }
 
     if (frequency && !["daily", "weekly"].includes(frequency)) {
@@ -16,7 +16,7 @@ const createHabit = async (req, res) => {
 
     const habit = new Habit({
       userId: req.userId,
-      title,
+      name,
       description: description || "",
       frequency: frequency || "daily",
       color: color || "#3498db",

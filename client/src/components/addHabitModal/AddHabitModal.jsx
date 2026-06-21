@@ -3,11 +3,18 @@ import style from "./AddHabitModal.module.css";
 import XIcon from "../icons/XIcons";
 import { useState } from "react";
 import { InputMask } from "@react-input/mask";
+import useAuth from "../../hooks/useAuth";
 
-const AddHabitModal = ({ isOpen, toggleModal }) => {
-  const [time, setTime] = useState("");
+const AddHabitModal = ({ isOpen, toggleModal, handleAddHabit }) => {
   const root = document.getElementById("portal-root");
-
+  const { user } = useAuth();
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    frequency: "",
+    time: "",
+    color: "#864bbd",
+  });
   if (!root) return null;
 
   return createPortal(
@@ -25,7 +32,15 @@ const AddHabitModal = ({ isOpen, toggleModal }) => {
         <form className={style.form} action="#">
           <div className={style.formGroup}>
             <label htmlFor="name">Habit Name</label>
-            <input id="name" type="text" placeholder="e.g., Morning exercise" />
+            <input
+              id="name"
+              type="text"
+              placeholder="e.g., Morning exercise"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+            />
           </div>
 
           <div className={style.formGroup}>
@@ -33,12 +48,22 @@ const AddHabitModal = ({ isOpen, toggleModal }) => {
             <textarea
               id="description"
               placeholder="What does this habit involve?"
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
             />
           </div>
 
           <div className={style.formGroup}>
             <label htmlFor="frequency">Frequency</label>
-            <select id="frequency">
+            <select
+              id="frequency"
+              value={formData.frequency}
+              onChange={(e) =>
+                setFormData({ ...formData, frequency: e.target.value })
+              }
+            >
               <option value="daily">Daily</option>
               <option value="weekly">Weekly</option>
             </select>
@@ -50,15 +75,24 @@ const AddHabitModal = ({ isOpen, toggleModal }) => {
             <InputMask
               mask="__:__"
               replacement={{ _: /\d/ }}
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
+              value={formData.time}
+              onChange={(e) =>
+                setFormData({ ...formData, time: e.target.value })
+              }
               placeholder="00:00"
             ></InputMask>
           </div>
           <div className={style.footer}>
             <div className={style.formGroup}>
               <label htmlFor="color">Color</label>
-              <input id="name" type="color" />
+              <input
+                id="name"
+                type="color"
+                value={formData.color}
+                onChange={(e) =>
+                  setFormData({ ...formData, time: e.target.value })
+                }
+              />
             </div>
             <div className={style.buttons}>
               <button
@@ -67,7 +101,13 @@ const AddHabitModal = ({ isOpen, toggleModal }) => {
               >
                 Cancel
               </button>
-              <button className={`btn btn__black ${style.btnCancel}`}>
+              <button
+                type="submit"
+                onClick={(e) => {
+                  handleAddHabit(e, formData, setFormData);
+                }}
+                className={`btn btn__black ${style.btnCancel}`}
+              >
                 Add Habit
               </button>
             </div>

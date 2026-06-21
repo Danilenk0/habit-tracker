@@ -9,7 +9,7 @@ import instance from "../../axios";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [alerts, setAlert, addAlert] = useAlertStack([]);
+  const [alerts, addAlert] = useAlertStack([]);
   const [formData, setFormData] = useState({
     email: "",
     password: "",

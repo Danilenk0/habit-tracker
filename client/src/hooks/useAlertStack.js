@@ -13,7 +13,7 @@ const useErrorStack = () => {
     }, 2000);
   };
 
-  return [alerts, setAlert, addAlert];
+  return [alerts, addAlert];
 };
 
 export default useErrorStack;

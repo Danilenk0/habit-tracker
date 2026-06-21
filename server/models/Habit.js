@@ -6,7 +6,7 @@ const habitSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  title: {
+  name: {
     type: String,
     required: true,
   },

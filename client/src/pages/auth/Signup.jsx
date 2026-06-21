@@ -14,7 +14,7 @@ const Signup = () => {
     email: "",
     password: "",
   });
-  const [alerts, setAlert, addAlert] = useAlertStack([]);
+  const [alerts, addAlert] = useAlertStack([]);
   const [loading, setLoading] = useState(false);
 
   const handleSendForm = async (e) => {
