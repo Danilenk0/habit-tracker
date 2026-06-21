@@ -37,6 +37,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--color-text-secondary);
 }
 .container > div {
   display: flex;
@@ -68,7 +69,8 @@
 .formGroup input,
 textarea,
 select {
-  background-color: rgb(244, 244, 244);
+  background-color: var(--color-bg);
+  color: var(--color-text-);
   border: none;
   outline: none;
   padding: 0.4rem 0.8rem;
