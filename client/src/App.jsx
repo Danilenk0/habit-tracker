@@ -7,6 +7,7 @@ import useAuth from "./hooks/useAuth";
 import Plus from "./components/icons/Plus";
 import NoHabit from "./components/noHabit/NoHabit";
 import AddHabitModal from "./components/addHabitModal/AddHabitModal";
+import HabitCard from "./components/habitCard/HabitCard";
 import instance from "./axios";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
   const [habits, setHabits] = useState([]);
   useEffect(() => {
     checkAuth();
+    getHabits();
   }, []);
 
   const toggleAddModal = () => {
@@ -41,6 +43,18 @@ function App() {
       );
     }
   };
+  const getHabits = async () => {
+    try {
+      const response = await instance.get("/habits", {
+        withCredentials: true,
+      });
+      setHabits(response.data);
+    } catch (error) {
+      addAlert(
+        error?.respinse?.data?.mesage || error?.message || "Unknown error",
+      );
+    }
+  };
 
   return (
     <div className="App">
@@ -62,7 +76,15 @@ function App() {
             <p>Add Habit</p>
           </button>
         </div>
-        <NoHabit toggleAddModal={toggleAddModal} />
+        {habits.length == 0 ? (
+          <NoHabit toggleAddModal={toggleAddModal} />
+        ) : (
+          <section className="card-container">
+            {habits.map((item) => (
+              <HabitCard key={item._id} habit={item} />
+            ))}
+          </section>
+        )}
       </main>
     </div>
   );

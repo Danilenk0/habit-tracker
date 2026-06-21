@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Pliant:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-  --color-bg: oklch(0.98 0 0);
+  --color-bg: rgb(248, 248, 248);
   --color-bg-secondary: white;
   --color-bg-black: black;
   --color-text: #000000;
@@ -11,12 +11,12 @@
   --color-btn-bg: #ffffff;
   --color-btn-border: #ececec;
   --color-btn-text: #000000;
-  --color-text-secondary: oklch(44.6% 0.03 256.802);
+  --color-text-secondary: rgb(74, 85, 101);
 }
 
 [data-theme="dark"] {
-  --color-bg: oklch(21% 0.034 264.665);
-  --color-bg-secondary: oklch(27.8% 0.033 256.848);
+  --color-bg: rgb(16, 24, 40);
+  --color-bg-secondary: rgb(30, 41, 57);
   --color-bg-black: white;
   --color-text: #ffffff;
   --color-text-white: black;
