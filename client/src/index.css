@@ -9,7 +9,6 @@
   --color-border: #ececec;
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-btn-bg: #ffffff;
-  --color-btn-border: #ececec;
   --color-btn-text: #000000;
   --color-text-secondary: rgb(74, 85, 101);
 }
@@ -23,7 +22,6 @@
   --color-border: #333333;
   --color-shadow: rgba(255, 255, 255, 0.1);
   --color-btn-bg: #2a2a2a;
-  --color-btn-border: #444444;
   --color-btn-text: #ffffff;
   --color-text-secondary: oklch(60.98% 0.04066 259.796);
 }

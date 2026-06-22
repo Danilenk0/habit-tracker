@@ -29,8 +29,8 @@
   gap: 0.5rem;
 }
 .buttons button {
-  border: 1px solid var(--color-btn-border);
-  background-color: var(--color-btn-bg);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg);
   color: var(--color-btn-text);
   transition:
     background-color 0.3s ease,
