@@ -4,11 +4,11 @@ import DeleteIcon from "../icons/DeleteIcon";
 import CheckIcon from "../icons/CheckIcon";
 import ArrowIcon from "../icons/ArrowIcons";
 
-const HabitCard = ({ habit }) => {
+const HabitCard = ({ habit, handleDeleteHabit }) => {
   const getWeekDays = () => {
     const today = new Date();
 
-    const dayOfWeek = today.getDay(); // 0 (Sun) - 6 (Sat)
+    const dayOfWeek = today.getDay();
     const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
 
     const monday = new Date(today);
@@ -44,7 +44,7 @@ const HabitCard = ({ habit }) => {
           <button>
             <EditIcon width={16} height={16} />
           </button>
-          <button>
+          <button onClick={() => handleDeleteHabit(habit._id)}>
             <DeleteIcon width={16} height={16} />
           </button>
         </div>

@@ -9,6 +9,7 @@ import NoHabit from "./components/noHabit/NoHabit";
 import AddHabitModal from "./components/addHabitModal/AddHabitModal";
 import HabitCard from "./components/habitCard/HabitCard";
 import instance from "./axios";
+import axios from "axios";
 
 function App() {
   const { user, checkAuth } = useAuth();
@@ -37,6 +38,20 @@ function App() {
         time: "",
         color: "#864bbd",
       });
+      addAlert("Habit successfully added!", "success");
+    } catch (error) {
+      addAlert(
+        error?.response?.data?.message || error?.message || "Unknown error",
+        "error",
+      );
+    }
+  };
+
+  const handleDeleteHabit = async (id) => {
+    try {
+      await instance.delete(`/habits/${id}`);
+      addAlert("Habit successfully deleted!!", "success");
+      setHabits(habits.filter((item) => item._id !== id));
     } catch (error) {
       addAlert(
         error?.response?.data?.message || error?.message || "Unknown error",
@@ -81,7 +96,11 @@ function App() {
         ) : (
           <section className="card-container">
             {habits.map((item) => (
-              <HabitCard key={item._id} habit={item} />
+              <HabitCard
+                key={item._id}
+                habit={item}
+                handleDeleteHabit={handleDeleteHabit}
+              />
             ))}
           </section>
         )}
