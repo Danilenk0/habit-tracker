@@ -23,6 +23,11 @@ const habitSchema = new mongoose.Schema({
     type: String,
     default: "#3498db",
   },
+  completedDays: [
+    {
+      type: String,
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

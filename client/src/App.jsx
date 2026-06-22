@@ -69,14 +69,31 @@ function App() {
       const response = await instance.get("/habits", {
         withCredentials: true,
       });
+      console.log(response.data);
       setHabits(response.data);
     } catch (error) {
       addAlert(
-        error?.respinse?.data?.mesage || error?.message || "Unknown error",
+        error?.response?.data?.mesage || error?.message || "Unknown error",
       );
     }
   };
 
+  const toggleDay = async (habit, date) => {
+    try {
+      const response = await instance.put(`/habits/${habit._id}/toggle-day`, {
+        date,
+      });
+
+      setHabits((prev) =>
+        prev.map((h) => (h._id === habit._id ? response.data : h)),
+      );
+    } catch (error) {
+      addAlert(
+        error?.response?.data?.message || error?.message || "unknown error",
+        "error",
+      );
+    }
+  };
   return (
     <div className="App">
       <AlertStack alerts={alerts} />
@@ -112,6 +129,7 @@ function App() {
                 habit={item}
                 handleDeleteHabit={handleDeleteHabit}
                 toggleModal={toggleModal}
+                toggleDay={toggleDay}
               />
             ))}
           </section>

@@ -76,4 +76,27 @@ const deleteHabit = async (req, res) => {
   }
 };
 
-export { createHabit, getHabits, updateHabit, deleteHabit };
+const toggleDay = async (req, res) => {
+  try {
+    const { date } = req.body;
+    const { id } = req.params;
+
+    const habit = await Habit.findById(id);
+
+    const exists = habit.completedDays.includes(date);
+
+    if (exists) {
+      habit.completedDays = habit.completedDays.filter((d) => d !== date);
+    } else {
+      habit.completedDays.push(date);
+    }
+
+    await habit.save();
+
+    res.json(habit);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export { createHabit, getHabits, updateHabit, deleteHabit, toggleDay };

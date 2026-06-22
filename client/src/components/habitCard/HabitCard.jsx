@@ -4,7 +4,7 @@ import DeleteIcon from "../icons/DeleteIcon";
 import CheckIcon from "../icons/CheckIcon";
 import ArrowIcon from "../icons/ArrowIcons";
 
-const HabitCard = ({ habit, handleDeleteHabit, toggleModal }) => {
+const HabitCard = ({ habit, handleDeleteHabit, toggleModal, toggleDay }) => {
   const getWeekDays = () => {
     const today = new Date();
 
@@ -28,6 +28,7 @@ const HabitCard = ({ habit, handleDeleteHabit, toggleModal }) => {
       };
     });
   };
+
   const week = getWeekDays();
 
   return (
@@ -64,7 +65,10 @@ const HabitCard = ({ habit, handleDeleteHabit, toggleModal }) => {
             {week.map((d) => (
               <button
                 key={d.fullDate}
-                className={`${style.day} ${d.isToday ? style.today : ""}`}
+                onClick={() => {
+                  toggleDay(habit, d.fullDate);
+                }}
+                className={`${style.day} ${d.isToday ? style.today : ""} ${habit.completedDays?.includes(d.fullDate) ? style.completed : ""}`}
               >
                 <span>{d.label}</span>
                 <span>{d.day}</span>
