@@ -90,7 +90,7 @@ const AddHabitModal = ({ isOpen, toggleModal, handleAddHabit }) => {
                 type="color"
                 value={formData.color}
                 onChange={(e) =>
-                  setFormData({ ...formData, time: e.target.value })
+                  setFormData({ ...formData, color: e.target.value })
                 }
               />
             </div>
