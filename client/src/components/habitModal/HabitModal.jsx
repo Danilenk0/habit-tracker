@@ -1,13 +1,17 @@
 import { createPortal } from "react-dom";
-import style from "./AddHabitModal.module.css";
+import style from "./HabitModal.module.css";
 import XIcon from "../icons/XIcons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { InputMask } from "@react-input/mask";
-import useAuth from "../../hooks/useAuth";
 
-const AddHabitModal = ({ isOpen, toggleModal, handleAddHabit }) => {
+const HabitModal = ({
+  isOpen,
+  toggleModal,
+  handleSubmit,
+  modalMode,
+  editableHabit,
+}) => {
   const root = document.getElementById("portal-root");
-  const { user } = useAuth();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -16,7 +20,27 @@ const AddHabitModal = ({ isOpen, toggleModal, handleAddHabit }) => {
     color: "#864bbd",
   });
   if (!root) return null;
+  useEffect(() => {
+    if (modalMode === "edit" && editableHabit) {
+      setFormData({
+        name: editableHabit?.name || "",
+        description: editableHabit?.description || "",
+        frequency: editableHabit?.frequency || "",
+        time: editableHabit?.time || "",
+        color: editableHabit?.color || "#864bbd",
+      });
+    }
 
+    if (modalMode === "add") {
+      setFormData({
+        name: "",
+        description: "",
+        frequency: "daily",
+        time: "",
+        color: "#864bbd",
+      });
+    }
+  }, [modalMode, editableHabit]);
   return createPortal(
     <div className={`${style.wrapper} ${isOpen ? "" : style.hidden}`}>
       <div className={style.container}>
@@ -104,11 +128,11 @@ const AddHabitModal = ({ isOpen, toggleModal, handleAddHabit }) => {
               <button
                 type="submit"
                 onClick={(e) => {
-                  handleAddHabit(e, formData, setFormData);
+                  handleSubmit(e, formData);
                 }}
                 className={`btn btn__black ${style.btnCancel}`}
               >
-                Add Habit
+                {modalMode === "edit" ? "Save Habit" : "Add Habit"}
               </button>
             </div>
           </div>
@@ -119,4 +143,4 @@ const AddHabitModal = ({ isOpen, toggleModal, handleAddHabit }) => {
   );
 };
 
-export default AddHabitModal;
+export default HabitModal;

@@ -4,7 +4,7 @@ import DeleteIcon from "../icons/DeleteIcon";
 import CheckIcon from "../icons/CheckIcon";
 import ArrowIcon from "../icons/ArrowIcons";
 
-const HabitCard = ({ habit, handleDeleteHabit }) => {
+const HabitCard = ({ habit, handleDeleteHabit, toggleModal }) => {
   const getWeekDays = () => {
     const today = new Date();
 
@@ -35,13 +35,13 @@ const HabitCard = ({ habit, handleDeleteHabit }) => {
       <header className={style.header}>
         <div className={style.headerContent}>
           <div className={style.title}>
-            <div style={{ "background-color": habit.color }}></div>
+            <div style={{ backgroundColor: habit.color }}></div>
             <p>{habit.name}</p>
           </div>
           <p>{habit.description}</p>
         </div>
         <div className={style.buttons}>
-          <button>
+          <button onClick={() => toggleModal("edit", habit)}>
             <EditIcon width={16} height={16} />
           </button>
           <button onClick={() => handleDeleteHabit(habit._id)}>

@@ -1,5 +1,5 @@
 import style from "./NoHabit.module.css";
-import Plus from "../icons/Plus";
+import Plus from "../icons/PlusIcon";
 
 const NoHabit = ({ toggleAddModal }) => {
   return (
