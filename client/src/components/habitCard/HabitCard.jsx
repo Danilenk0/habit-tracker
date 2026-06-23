@@ -37,6 +37,9 @@ const HabitCard = ({
   };
 
   const week = getWeekDays();
+  const weekCompleted = week.filter((d) =>
+    habit.completedDays?.includes(d.fullDate),
+  ).length;
 
   return (
     <div className={style.card}>
@@ -78,7 +81,7 @@ const HabitCard = ({
           <p>Complete for today</p>
         </button>
         <div className={style.week}>
-          <p>This week 0/7</p>
+          <p>This week {weekCompleted}/7</p>
           <div className={style.weekGalary}>
             {week.map((d) => (
               <button

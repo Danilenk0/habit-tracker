@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useErrorStack = () => {
+const useAlertStack = () => {
   const [alerts, setAlert] = useState([]);
   const addAlert = (message, type) => {
     let id = Date.now();
@@ -16,4 +16,4 @@ const useErrorStack = () => {
   return [alerts, addAlert];
 };
 
-export default useErrorStack;
+export default useAlertStack;

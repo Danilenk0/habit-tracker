@@ -9,7 +9,7 @@ import instance from "../../axios";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [alerts, addAlert] = useAlertStack([]);
+  const [alerts, addAlert] = useAlertStack();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -41,20 +41,20 @@ const Login = () => {
         <p>Build better habits, one day at a time.</p>
         <div className={style.buttons}>
           <Link
-            className={location.pathname == "/login" ? style.active : ""}
+            className={location.pathname === "/login" ? style.active : ""}
             to="/login"
           >
             Login
           </Link>
           <Link
-            className={location.pathname == "/signup" ? style.active : ""}
+            className={location.pathname === "/signup" ? style.active : ""}
             to="/signup"
           >
             Sign Up
           </Link>
         </div>
 
-        <form className={style.form}>
+        <form className={style.form} onSubmit={handleSubmitForm}>
           <h3>Welcome Back!</h3>
           <p>Sign in to your account to continue.</p>
           <div className={style.formGroup}>
@@ -83,13 +83,7 @@ const Login = () => {
             <input type="checkbox" id="rememberMe" />
             <label htmlFor="rememberMe">Remember Me</label>
           </div>
-          <button
-            onClick={(e) => {
-              handleSubmitForm(e);
-            }}
-            className={style.submitButton}
-            type="submit"
-          >
+          <button className={style.submitButton} type="submit">
             Login
           </button>
         </form>

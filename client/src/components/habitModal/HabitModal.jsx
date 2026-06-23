@@ -19,7 +19,9 @@ const HabitModal = ({
     time: "",
     color: "#864bbd",
   });
+
   if (!root) return null;
+
   useEffect(() => {
     if (modalMode === "edit" && editableHabit) {
       setFormData({
@@ -41,6 +43,7 @@ const HabitModal = ({
       });
     }
   }, [modalMode, editableHabit]);
+
   return createPortal(
     <div className={`${style.wrapper} ${isOpen ? "" : style.hidden}`}>
       <div className={style.container}>
@@ -53,7 +56,10 @@ const HabitModal = ({
           <p>Create a new habit to track. Set reminders to stay on track.</p>
         </div>
 
-        <form className={style.form} action="#">
+        <form
+          className={style.form}
+          onSubmit={(e) => handleSubmit(e, formData)}
+        >
           <div className={style.formGroup}>
             <label htmlFor="name">Habit Name</label>
             <input
@@ -104,13 +110,13 @@ const HabitModal = ({
                 setFormData({ ...formData, time: e.target.value })
               }
               placeholder="00:00"
-            ></InputMask>
+            />
           </div>
           <div className={style.footer}>
             <div className={style.formGroup}>
               <label htmlFor="color">Color</label>
               <input
-                id="name"
+                id="color"
                 type="color"
                 value={formData.color}
                 onChange={(e) =>
@@ -122,14 +128,12 @@ const HabitModal = ({
               <button
                 onClick={toggleModal}
                 className={`btn ${style.btnCancel}`}
+                type="button"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                onClick={(e) => {
-                  handleSubmit(e, formData);
-                }}
                 className={`btn btn__black ${style.btnCancel}`}
               >
                 {modalMode === "edit" ? "Save Habit" : "Add Habit"}

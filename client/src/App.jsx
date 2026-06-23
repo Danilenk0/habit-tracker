@@ -22,10 +22,16 @@ function App() {
   const [habits, setHabits] = useState([]);
   const [modalMode, setModalMode] = useState("");
   const [editableHabit, setEditableHabit] = useState({});
+
   useEffect(() => {
     checkAuth();
-    getHabits();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      getHabits();
+    }
+  }, [user]);
 
   const toggleModal = (mode = "", habit = null) => {
     setModalMode(mode);
@@ -69,16 +75,16 @@ function App() {
       );
     }
   };
+
   const getHabits = async () => {
     try {
       const response = await instance.get("/habits", {
         withCredentials: true,
       });
-      console.log(response.data);
       setHabits(response.data);
     } catch (error) {
       addAlert(
-        error?.response?.data?.mesage || error?.message || "Unknown error",
+        error?.response?.data?.message || error?.message || "Unknown error",
       );
     }
   };
@@ -239,7 +245,7 @@ function App() {
             <p>Add Habit</p>
           </button>
         </div>
-        {habits.length == 0 ? (
+        {habits.length === 0 ? (
           <NoHabit toggleAddModal={() => toggleModal("add")} />
         ) : (
           <section className="card-container">

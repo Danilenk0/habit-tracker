@@ -14,7 +14,7 @@ const Signup = () => {
     email: "",
     password: "",
   });
-  const [alerts, addAlert] = useAlertStack([]);
+  const [alerts, addAlert] = useAlertStack();
   const [loading, setLoading] = useState(false);
 
   const handleSendForm = async (e) => {
@@ -36,7 +36,7 @@ const Signup = () => {
       }
     } catch (error) {
       addAlert(
-        error.response?.data?.message || error.message || "Ошибка регистрации",
+        error.response?.data?.message || error.message || "Registration error",
         "error",
       );
     } finally {
@@ -52,13 +52,13 @@ const Signup = () => {
         <p>Build better habits, one day at a time.</p>
         <div className={style.buttons}>
           <Link
-            className={location.pathname == "/login" ? style.active : ""}
+            className={location.pathname === "/login" ? style.active : ""}
             to="/login"
           >
             Login
           </Link>
           <Link
-            className={location.pathname == "/signup" ? style.active : ""}
+            className={location.pathname === "/signup" ? style.active : ""}
             to="/signup"
           >
             Sign Up

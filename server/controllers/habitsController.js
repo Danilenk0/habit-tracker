@@ -41,14 +41,14 @@ const getHabits = async (req, res) => {
 const updateHabit = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, frequency, color } = req.body;
+    const { name, description, frequency, color } = req.body;
 
     const habit = await Habit.findOne({ _id: id, userId: req.userId });
     if (!habit) {
       return res.status(404).json({ message: "Habit not found" });
     }
 
-    if (title) habit.title = title;
+    if (name) habit.name = name;
     if (description !== undefined) habit.description = description;
     if (frequency && ["daily", "weekly"].includes(frequency))
       habit.frequency = frequency;
@@ -81,7 +81,10 @@ const toggleDay = async (req, res) => {
     const { date } = req.body;
     const { id } = req.params;
 
-    const habit = await Habit.findById(id);
+    const habit = await Habit.findOne({ _id: id, userId: req.userId });
+    if (!habit) {
+      return res.status(404).json({ message: "Habit not found" });
+    }
 
     const exists = habit.completedDays.includes(date);
 
