@@ -8,6 +8,11 @@ import Plus from "./components/icons/PlusIcon";
 import NoHabit from "./components/noHabit/NoHabit";
 import HabitModal from "./components/habitModal/HabitModal";
 import HabitCard from "./components/habitCard/HabitCard";
+import ProgressCard from "./components/ProgressCard/ProgressCard";
+import ArrowIcon from "./components/icons/ArrowIcons";
+import SparklesIcon from "./components/icons/SparklesIcon";
+import CalendarIcon from "./components/icons/CalendarIcon";
+import FireIcon from "./components/icons/FireIcon";
 import instance from "./axios";
 
 function App() {
@@ -94,6 +99,84 @@ function App() {
       );
     }
   };
+  const today = new Date().toISOString().split("T")[0];
+
+  const completedToday = habits.filter((habit) =>
+    habit.completedDays?.includes(today),
+  ).length;
+
+  const todayProgress = habits.length
+    ? Math.round((completedToday / habits.length) * 100)
+    : 0;
+  const getWeekDates = () => {
+    const today = new Date();
+
+    const dayOfWeek = today.getDay();
+    const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+
+    const monday = new Date(today);
+    monday.setDate(today.getDate() + mondayOffset);
+
+    return Array.from({ length: 7 }).map((_, i) => {
+      const date = new Date(monday);
+      date.setDate(monday.getDate() + i);
+
+      return date.toISOString().split("T")[0];
+    });
+  };
+
+  const weekDates = getWeekDates();
+
+  const weekCompletions = habits.reduce((sum, habit) => {
+    return (
+      sum +
+      (habit.completedDays?.filter((day) => weekDates.includes(day)).length ||
+        0)
+    );
+  }, 0);
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+
+  const monthCompletions = habits.reduce((sum, habit) => {
+    const count =
+      habit.completedDays?.filter((day) => {
+        const date = new Date(day);
+
+        return (
+          date.getMonth() === currentMonth && date.getFullYear() === currentYear
+        );
+      }).length || 0;
+
+    return sum + count;
+  }, 0);
+  const getStreak = (completedDays) => {
+    if (!completedDays?.length) return 0;
+
+    const daysSet = new Set(completedDays);
+
+    let current = new Date();
+    let streak = 0;
+
+    const today = current.toISOString().split("T")[0];
+
+    if (!daysSet.has(today)) {
+      current.setDate(current.getDate() - 1);
+    }
+    while (true) {
+      const dateStr = current.toISOString().split("T")[0];
+
+      if (!daysSet.has(dateStr)) break;
+
+      streak++;
+      current.setDate(current.getDate() - 1);
+    }
+
+    return streak;
+  };
+  const bestStreak = Math.max(
+    ...habits.map((habit) => getStreak(habit.completedDays)),
+    0,
+  );
   return (
     <div className="App">
       <AlertStack alerts={alerts} />
@@ -106,6 +189,43 @@ function App() {
       />
       <Header />
       <main className="main">
+        <section className="progress-galary">
+          <ProgressCard
+            name="Today's Progress"
+            description={`${completedToday}/${habits.length} habits completed`}
+            progress={`${todayProgress}%`}
+          >
+            <SparklesIcon width={18} height={18} />
+          </ProgressCard>
+
+          <ProgressCard
+            name="This Week"
+            description="Total completions"
+            progress={weekCompletions}
+          >
+            <CalendarIcon width={18} height={18} />
+          </ProgressCard>
+
+          <ProgressCard
+            name="This Month"
+            description="Total completions"
+            progress={monthCompletions}
+          >
+            <ArrowIcon width={18} height={18} />
+          </ProgressCard>
+
+          <ProgressCard
+            name="Best Streak"
+            description="days in a row"
+            progress={bestStreak}
+          >
+            <FireIcon
+              width={18}
+              height={18}
+              style={{ color: "rgb(255, 105, 0) " }}
+            />
+          </ProgressCard>
+        </section>
         <div className="habits-header">
           <div className="header-text">
             <h2>My habits</h2>
@@ -130,6 +250,7 @@ function App() {
                 handleDeleteHabit={handleDeleteHabit}
                 toggleModal={toggleModal}
                 toggleDay={toggleDay}
+                getStreak={getStreak}
               />
             ))}
           </section>

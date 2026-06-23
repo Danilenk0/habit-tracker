@@ -5,7 +5,13 @@ import CheckIcon from "../icons/CheckIcon";
 import ArrowIcon from "../icons/ArrowIcons";
 import FireIcon from "../icons/FireIcon";
 
-const HabitCard = ({ habit, handleDeleteHabit, toggleModal, toggleDay }) => {
+const HabitCard = ({
+  habit,
+  handleDeleteHabit,
+  toggleModal,
+  toggleDay,
+  getStreak,
+}) => {
   const getWeekDays = () => {
     const today = new Date();
 
@@ -30,30 +36,6 @@ const HabitCard = ({ habit, handleDeleteHabit, toggleModal, toggleDay }) => {
     });
   };
 
-  const getStreak = (completedDays) => {
-    if (!completedDays?.length) return 0;
-
-    const daysSet = new Set(completedDays);
-
-    let current = new Date();
-    let streak = 0;
-
-    const today = current.toISOString().split("T")[0];
-
-    if (!daysSet.has(today)) {
-      current.setDate(current.getDate() - 1);
-    }
-    while (true) {
-      const dateStr = current.toISOString().split("T")[0];
-
-      if (!daysSet.has(dateStr)) break;
-
-      streak++;
-      current.setDate(current.getDate() - 1);
-    }
-
-    return streak;
-  };
   const week = getWeekDays();
 
   return (
