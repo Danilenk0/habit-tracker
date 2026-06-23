@@ -13,6 +13,7 @@ import ArrowIcon from "./components/icons/ArrowIcons";
 import SparklesIcon from "./components/icons/SparklesIcon";
 import CalendarIcon from "./components/icons/CalendarIcon";
 import FireIcon from "./components/icons/FireIcon";
+import HabitStatsModal from "./components/habitStatsModal/HabitStatsModal";
 import instance from "./axios";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
   const [habits, setHabits] = useState([]);
   const [modalMode, setModalMode] = useState("");
   const [editableHabit, setEditableHabit] = useState({});
+  const [statisticHabit, setStatisticHabit] = useState(null);
 
   useEffect(() => {
     checkAuth();
@@ -105,6 +107,11 @@ function App() {
       );
     }
   };
+
+  const toggleStats = (habit) => {
+    setStatisticHabit(habit === statisticHabit ? null : habit);
+  };
+
   const today = new Date().toISOString().split("T")[0];
 
   const completedToday = habits.filter((habit) =>
@@ -193,6 +200,11 @@ function App() {
         handleSubmit={handleSubmit}
         editableHabit={editableHabit}
       />
+      <HabitStatsModal
+        isOpen={!!statisticHabit}
+        toggleStats={() => setStatisticHabit(null)}
+        habit={statisticHabit}
+      />
       <Header />
       <main className="main">
         <section className="progress-galary">
@@ -257,6 +269,7 @@ function App() {
                 toggleModal={toggleModal}
                 toggleDay={toggleDay}
                 getStreak={getStreak}
+                toggleStats={toggleStats}
               />
             ))}
           </section>

@@ -11,6 +11,7 @@ const HabitCard = ({
   toggleModal,
   toggleDay,
   getStreak,
+  toggleStats,
 }) => {
   const getWeekDays = () => {
     const today = new Date();
@@ -97,7 +98,7 @@ const HabitCard = ({
             ))}
           </div>
         </div>
-        <button className={style.statistic}>
+        <button className={style.statistic} onClick={() => toggleStats(habit)}>
           <ArrowIcon width={18} height={18} />
           <p>View Statistics</p>
         </button>
