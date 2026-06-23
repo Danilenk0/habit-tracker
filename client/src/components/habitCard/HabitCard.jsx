@@ -3,6 +3,7 @@ import EditIcon from "../icons/EditIcon";
 import DeleteIcon from "../icons/DeleteIcon";
 import CheckIcon from "../icons/CheckIcon";
 import ArrowIcon from "../icons/ArrowIcons";
+import FireIcon from "../icons/FireIcon";
 
 const HabitCard = ({ habit, handleDeleteHabit, toggleModal, toggleDay }) => {
   const getWeekDays = () => {
@@ -29,6 +30,30 @@ const HabitCard = ({ habit, handleDeleteHabit, toggleModal, toggleDay }) => {
     });
   };
 
+  const getStreak = (completedDays) => {
+    if (!completedDays?.length) return 0;
+
+    const daysSet = new Set(completedDays);
+
+    let current = new Date();
+    let streak = 0;
+
+    const today = current.toISOString().split("T")[0];
+
+    if (!daysSet.has(today)) {
+      current.setDate(current.getDate() - 1);
+    }
+    while (true) {
+      const dateStr = current.toISOString().split("T")[0];
+
+      if (!daysSet.has(dateStr)) break;
+
+      streak++;
+      current.setDate(current.getDate() - 1);
+    }
+
+    return streak;
+  };
   const week = getWeekDays();
 
   return (
@@ -54,8 +79,19 @@ const HabitCard = ({ habit, handleDeleteHabit, toggleModal, toggleDay }) => {
         <div className={style.habitMeta}>
           <p>{habit.frequency}</p>
           {habit.time && <p>{habit.time}</p>}
+          {getStreak(habit.completedDays) !== 0 && (
+            <div className={style.streak}>
+              <FireIcon width={17} height={17} />
+              <p>{getStreak(habit.completedDays)} day</p>
+            </div>
+          )}
         </div>
-        <button className={style.todayComplete}>
+        <button
+          onClick={() =>
+            toggleDay(habit, new Date().toISOString().split("T")[0])
+          }
+          className={`${style.todayComplete} ${habit.completedDays.includes(new Date().toISOString().split("T")[0]) ? style["todayComplete__complete"] : ""}`}
+        >
           <CheckIcon width={18} height={18} />
           <p>Complete for today</p>
         </button>

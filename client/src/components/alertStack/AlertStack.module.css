@@ -20,8 +20,8 @@
   color: rgb(255, 98, 98);
 }
 .stackItem__success {
-  border-color: #00f700;
-  color: #00cf00;
+  border-color: #00c950;
+  color: #008736;
 }
 .stackItem__warning {
   border-color: rgb(186, 186, 117);
